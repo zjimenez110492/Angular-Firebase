@@ -17,15 +17,22 @@ export class LoginComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router:Router) { }
 
   ngOnInit() {
+    this.afAuth.signOut();
   }
 onLoginGoogle()
 {
   this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
   this.router.navigate(['admin/list-books']);
 }
+onLoginFacebook()
+{
+  this.afAuth.signInWithPopup(new auth.FacebookAuthProvider());
+  
+  this.router.navigate(['admin/list-books']);
+}
 onLogout()
 {
   this.afAuth.signOut();
-  this.router.navigate(['']);
+  this.router.navigate(['user/login']);
 }
 }

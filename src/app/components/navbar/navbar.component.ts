@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../services/auth.service'
+import {AngularFireAuth} from '@angular/fire/auth'
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 public app_name:string="BookStore";
 public isLogged:boolean=false;
-  constructor() { }
+  constructor(private authService:AuthService, private afsAuth:AngularFireAuth) { }
+  
 
   ngOnInit() {
+    this.getCurrentUser();
   }
-
+  getCurrentUser()
+  {
+      this.authService.isAuth().subscribe(auth=>{
+        if(auth){
+          console.log("User logged");
+          this.isLogged=true;
+        }
+        else{
+          console.log("User NO logged");
+          this.isLogged=false;
+        }
+      });
+  }
 }
