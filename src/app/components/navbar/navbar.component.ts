@@ -29,4 +29,17 @@ public isLogged:boolean=false;
         }
       });
   }
+  onLogout()
+{
+  this.authService.isAuth().subscribe(auth=>{
+    if(auth){  
+      console.log("");   
+      this.afsAuth.signOut();
+      this.isLogged=false;
+    }
+    else{
+      console.log("NO SE PUEDE DES LOGEAR CUANDO NO HA INICIADO SESION");
+    }
+  });
+}
 }
